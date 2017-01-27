@@ -1,0 +1,77 @@
+* ft_ls
+** Obligatory part [/]
+*** flag =-l=
+#+BEGIN_SRC man 
+ (The lowercase letter ``ell''.)  List in long format.  (See below.)
+             If the output is to a terminal, a total sum for all the file sizes is
+             output on a line before the long listing.
+#+END_SRC
+*** flag =-R=
+#+BEGIN_SRC man
+Recursively list subdirectories encountered.
+#+END_SRC
+*** flag =-a=
+#+BEGIN_SRC man
+Include directory entries whose names begin with a dot (.).
+#+END_SRC
+*** flag =-r=
+#+BEGIN_SRC man
+Reverse the order of the sort to get reverse lexicographical order or
+the oldest entries first (or largest files last, if combined with sort
+by size
+#+END_SRC
+*** flag =-t=
+#+BEGIN_SRC man
+Sort by time modified (most recently modified first) before sorting
+the operands by lexicographical order.
+#+END_SRC
+** Bonus part
+*** flag =-G=, colors
+#+BEGIN_SRC man
+Enable colorized output.  This option is equivalent to defining
+CLICOLOR in the environment.  (See below.)
+#+END_SRC
+*** ACL
+*** flag =-u=
+#+BEGIN_SRC man
+ Use time of last access, instead of last modification of the file for
+sorting (-t) or long printing (-l).
+#+END_SRC
+*** flag =-f=
+#+BEGIN_SRC man
+Output is not sorted.  This option turns on the -a option.
+#+END_SRC
+*** flag =-g=
+#+BEGIN_SRC man
+This option is only available for compatibility with POSIX; it is used
+to display the group name in the long (-l) format output (the owner
+name is suppressed).
+#+END_SRC
+*** flag =-d=
+#+BEGIN_SRC man
+Directories are listed as plain files (not searched recursively).
+#+END_SRC
+*** optimize speed for =ls - lR=
+** TODO Read man
+*** opendir / readdir / closedir 
+*** stat / lstat
+*** getpwuid / getgrgid
+*** time / ctime
+*** readlink
+*** perror / strerror
+*** ls
+** TODO mini sub-projects
+*** TODO list the contents of a directory
+EÉcrire un programme qui utilise les fonctions =opendir=, =readdir= et
+=closedir= pour ouvrir un répertoire et lister les noms de ce qu’il contient sur
+la console.
+#+BEGIN_SRC sh example 
+$>mkdir -p toto/tyty
+$>touch toto/{tata,titi,tutu}
+$>./ft_list_dir toto
+tata titi
+tutu tyty
+$>
+#+END_SRC
+
+*** TODO get informations on a file
