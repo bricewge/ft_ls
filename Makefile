@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/27 13:36:05 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/27 14:11:17 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -47,6 +47,9 @@ $(NAME): $(LIB)/$(LIB).a $(OBJ)
 
 list_dir: $(SRC_PATH)/list_dir.c $(INCLUDE)/list_dir.h $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o list_dir
+
+inspect_file: $(SRC_PATH)/inspect_file.c $(INCLUDE)/inspect_file.h $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o $@
 
 $(OBJ_PATH):
 	mkdir $@

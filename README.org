@@ -75,3 +75,20 @@ $>
 #+END_SRC
 
 *** TODO get informations on a file
+ÉEcrire un programme qui prend un fichier en paramètre et utilise, entre autres,
+la fonction =stat= pour obtenir des informations sur ce fichier et les afficher
+à l’écran.
+#+BEGIN_SRC sh example
+$>./ft_inspect_file un_fichier_de_ouf
+Nom: un_fichier_de_ouf
+Type: Fichier
+Modes: rwxr-xr-x
+Nombre de liens: 1
+Proprietaire: zaz
+Groupe: staff
+Taille: 2142 octets
+Date de derniere modification: Sep 17 23:42
+$>
+#+END_SRC
+Vous allez devoir utiliser plusieurs fonctions, données en début de ce document,
+afin d’interpréter les informations renvoyées par =stat=.
