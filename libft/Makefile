@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/21 14:00:10 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/27 13:33:54 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 ## Flags for the C preprocessor
-CPPFLAGS = -I$(INCLUDES)
+CPPFLAGS = -I$(INCLUDE)
 NAME = libft.a
 
 # Project related variables
@@ -92,8 +92,8 @@ OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-INCLUDES = includes
-HEADER = $(INCLUDES)/$(NAME:.a=.h)
+INCLUDE = include
+HEADER = $(INCLUDE)/$(NAME:.a=.h)
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
