@@ -6,11 +6,28 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 13:52:29 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/27 16:06:53 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/29 00:30:58 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inspect_file.h"
+#include "ft_ls.h"
+
+char	*file_mode(mode_t mode)
+{
+	char	*result;
+
+	result = ft_strdup("---------");
+	if ( mode & S_IRUSR ) result[0] = 'r';
+    if ( mode & S_IWUSR ) result[1] = 'w';
+    if ( mode & S_IXUSR ) result[2] = 'x';
+    if ( mode & S_IRGRP ) result[3] = 'r';
+    if ( mode & S_IWGRP ) result[4] = 'w';
+    if ( mode & S_IXGRP ) result[5] = 'x';
+    if ( mode & S_IROTH ) result[6] = 'r';
+    if ( mode & S_IWOTH ) result[7] = 'w';
+    if ( mode & S_IXOTH ) result[8] = 'x';
+	return (result);
+}
 
 char	*file_type(mode_t mode)
 {
@@ -44,7 +61,10 @@ int		main(int ac, char **av)
 			ft_putstr("Type: ");
 			ft_putendl(file_type((buf.st_mode)));
 			ft_putstr("Modes: ");
+			ft_putendl(file_mode((buf.st_mode)));
 			ft_putstr("Nombre de liens: ");
+			ft_putnbr(buf.st_nlink);
+			ft_putchar('\n');
 			ft_putstr("Proprietaire: ");
 			ft_putendl(getpwuid(buf.st_uid)->pw_name);
 			ft_putstr("Groupe: ");
@@ -53,7 +73,7 @@ int		main(int ac, char **av)
 			ft_putnbr(buf.st_size);
 			ft_putstr(" octets\n");
 			ft_putstr("Date de derniere modification: ");
-			/* ft_putendl(buf.st_mtimespec); */
+			ft_putstr(ctime(&buf.st_mtimespec.tv_sec));
 		}
 	}
 	return (0);

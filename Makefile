@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/27 14:11:17 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/29 00:30:42 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -48,10 +48,10 @@ all: $(NAME)
 $(NAME): $(LIB)/$(LIB).a $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $(NAME)
 
-list_dir: $(SRC_PATH)/list_dir.c $(INCLUDE)/list_dir.h $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o list_dir
+list_dir: $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(HEADER) $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(LIB)/$(LIB).a -o list_dir
 
-inspect_file: $(SRC_PATH)/inspect_file.c $(INCLUDE)/inspect_file.h $(LIB)/$(LIB).a
+inspect_file: $(SRC_PATH)/inspect_file.c $(HEADER) $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o $@
 
 $(OBJ_PATH):
