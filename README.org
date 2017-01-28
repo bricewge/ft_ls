@@ -2,9 +2,9 @@
 ** Obligatory part [/]
 *** flag =-l=
 #+BEGIN_SRC man 
- (The lowercase letter ``ell''.)  List in long format.  (See below.)
-             If the output is to a terminal, a total sum for all the file sizes is
-             output on a line before the long listing.
+(The lowercase letter ``ell''.)  List in long format.  (See below.)
+If the output is to a terminal, a total sum for all the file sizes is
+output on a line before the long listing.
 #+END_SRC
 *** flag =-R=
 #+BEGIN_SRC man
@@ -69,8 +69,10 @@ la console.
 $>mkdir -p toto/tyty
 $>touch toto/{tata,titi,tutu}
 $>./ft_list_dir toto
-tata titi
-tutu tyty
+tata
+titi
+tutu
+tyty
 $>
 #+END_SRC
 
