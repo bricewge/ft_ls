@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 00:24:33 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/29 00:24:48 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/29 00:47:23 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int		error(char *name, char *path)
 	ft_putstr_fd(": ", fd);
 	if (path)
 	{
-		if (path[ft_strlen(path) - 1] != '/')
+		if (errno == ENOENT || errno == ENOTDIR)
+			ft_putstr_fd(path, fd);
+		else if (path[ft_strlen(path) - 1] != '/')
 		{
 			tmp = ft_basename(path);
 			ft_putstr_fd(tmp, fd);
