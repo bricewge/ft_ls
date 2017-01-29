@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/29 00:30:42 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/29 03:38:31 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -79,7 +79,7 @@ clean:
 
 fclean: clean
 	$(MAKE) -C ./$(LIB) fclean
-	$(RM) -r $(NAME) $(NAME).dSYM list_dir
+	$(RM) -r $(NAME) *.dSYM list_dir inspect_file
 
 re: fclean
 	$(MAKE) all
