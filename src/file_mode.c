@@ -6,11 +6,11 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:15:47 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/29 00:12:02 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/29 01:32:46 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
 static char	file_mode_type(mode_t mode)
 {
@@ -34,7 +34,7 @@ char		*file_mode(mode_t mode)
 	char	*result;
 
 	result = ft_strdup("----------");
-	result[0] = file_fmode_type(mode);
+	result[0] = file_mode_type(mode);
 	if (mode & S_IRUSR)
 		result[1] = 'r';
 	if (mode & S_IWUSR)

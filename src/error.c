@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 00:24:33 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/29 00:47:23 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/29 01:16:39 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Display error in a identical way as ls.
 */
 
-int		error(char *name, char *path)
+void	error(char *name, char *path)
 {
 	int		fd;
 	char	*tmp;
@@ -39,5 +39,5 @@ int		error(char *name, char *path)
     tmp = strerror(errno);
 	ft_putendl_fd(tmp, fd);
 	free(tmp);
-	return (1);
+	exit (1);
 }
