@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/29 03:38:31 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/01/30 00:42:42 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,6 +29,7 @@ SRC_PATH =  src
 SRC_NAME =	usage.c			\
 						file_mode.c	\
 						error.c			\
+						ft_getopt.c	\
 						ft_ls.c
 OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -53,6 +54,10 @@ list_dir: $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(HEADER) $(LIB)/$(LIB).a
 
 inspect_file: $(SRC_PATH)/inspect_file.c $(HEADER) $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o $@
+
+test_opt: $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(SRC_PATH)/ft_getopt.c $(HEADER) $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(SRC_PATH)/ft_getopt.c $(LIB)/$(LIB).a -o $@
+
 
 $(OBJ_PATH):
 	mkdir $@

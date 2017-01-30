@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 19:28:28 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/29 01:31:35 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/01/30 01:49:08 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 typedef	struct dirent	t_dirent;
 typedef	struct stat t_stat;
 void	usage(char *options);
+
+int		ft_getopt(int argc, char *const argv[], const char *optstring);
+
 void	error(char *name, char *path);
 char	*file_mode(mode_t mode);
 #endif

@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   usage.c                                            :+:      :+:    :+:   */
+/*   test_opt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 19:40:58 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/30 00:22:15 by bwaegene         ###   ########.fr       */
+/*   Created: 2017/01/29 21:44:43 by bwaegene          #+#    #+#             */
+/*   Updated: 2017/01/30 02:54:30 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	usage(char *options)
+
+int		main(int ac, char **av)
 {
-	ft_putstr_fd("usage: ft_ls [-", 2);
-	ft_putstr_fd(options, 2);
-	ft_putendl_fd("] [file ...]", 2);
-	exit (1);
+	int		bflag;
+	char	*fvalue;
+	int		opt;
+
+	bflag = 0;
+	fvalue = NULL;
+	while ((opt = getopt(ac, av, "bf:" )) != -1)
+	{
+		if (opt == 'b')
+			bflag = 1;
+		else if (opt == 'f')
+			fvalue = av[(uintptr_t)optind - 1];
+		else
+		{
+			usage("bf");
+		}
+	}
+	ft_putstr("bflag: ");
+	ft_putnbr(bflag);
+	ft_putstr(", fvalue: ");
+	ft_putendl(fvalue);
+	ac -= optind;
+	av += optind;
+	return (0);
 }
