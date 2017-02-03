@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 00:22:27 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/30 02:53:35 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/02/03 22:32:14 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,11 @@
 #include <unistd.h>
 #include "libft.h"
 
-/* Assume: */
-/* int	opterr = 1,		/\* if error message should be printed *\/ */
-/* 	optind = 1,		/\* index into parent argv vector *\/ */
-/* 	optopt,			/\* character checked for validity *\/ */
-/* 	optreset;		/\* reset getopt *\/ */
-/* char	*optarg; /\* argument associated with option *\/ */
-
-void		ft_getopt_error(char *name, char *error)
+void		ft_getopt_error(char *name, char *error, const char *optstring)
 {
 	char	c[2];
 
-	if (opterr)
+	if (opterr && *optstring != ':')
 	{
 		ft_putstr_fd(name, 2);
 		ft_putstr_fd(": ", 2);
@@ -38,74 +31,77 @@ void		ft_getopt_error(char *name, char *error)
 	}
 }
 
-static void		ft_getopt_reset(void)
-{
-	if (!optind || optreset == 1)
-	{
-		optind = 1;
-		optreset = 0;
-	}
-}
-
 static int		ft_getopt_valid(char *const argv[], const char *optstring,
-								char *opt)
+								char *opt, int arg_i)
 {
+	optopt = argv[(uintptr_t)optind][arg_i];
 	// The option take an argument
 	if (opt[1] == ':')
 	{
-		// The flag has an argument without a whitespace
-		if (argv[(uintptr_t)optind][2])
-			optarg = (char*)argv[(uintptr_t)optind];
-		// The flag has an arguement with a whitespace
+		// The option has an argument without a whitespace
+		if (argv[(uintptr_t)optind][arg_i + 1])
+			optarg = (char*)argv[(uintptr_t)optind++] + arg_i + 1;
+		// The option has an arguement with a whitespace
 		else if (argv[(uintptr_t)optind + 1])
-			optarg = (char*)argv[(uintptr_t)optind++ + 1];
-		// The flag should have had an arguemnt
+		{
+			++optind;
+			optarg = (char*)argv[(uintptr_t)optind++];
+		}
+		// The option should have had an arguemnt
 		else
 		{
-			ft_getopt_error((char*)argv[0], "option requires an argument");
-			++optind;
-			return ((*optstring == ':' ? ':' : '?'));
+			ft_getopt_error((char*)argv[0], "option requires an argument", optstring);
+			optind += 2;
+			optarg = NULL;
+			return ((optstring[0] == ':' ? ':' : '?'));
 		}
-		++optind;
-		return (optopt);
 	}
 	// This option doesn't take argument
-	optarg = (char*)argv[(uintptr_t)optind];
+	else
+	{
+		optarg = NULL;
+		// There are other option left to process in this argument
+		if (argv[(uintptr_t)optind][arg_i + 1])
+			++arg_i;
+		// This is the last option in this argument
+		else
+			++optind;
+	}
 	return (optopt);
 }
 
 int		ft_getopt(int argc, char *const argv[], const char *optstring)
 {
-	int		arg_i;
-	char	*opt;
-	int		result;
+	static int	arg_i = 1;
+	char		*opt;
 
 	ft_getopt_reset();
-	// There is still argument to process
-	if (optind < argc)
+	if (optreset == 1)
+		optreset = 0;
+	if (ft_strequ(argv[(uintptr_t)optind], "--"))
 	{
-		arg_i = 0;
-		while (argv[(uintptr_t)optind] && argv[(uintptr_t)optind][arg_i])
+		++optind;
+		return (-1);
+	}
+	// There is still arguments to process
+	if (optind < argc && argv[(uintptr_t)optind][0] == '-')
+	{
+		while (argv[(uintptr_t)optind][arg_i])
 		{
-			(optopt = argv[(uintptr_t)optind][arg_i]);
-			if (optopt == '-')
-				;
 			// The option is valid
-			else if ((opt = ft_strchr(optstring, optopt)) != NULL)
-				result = ft_getopt_valid(argv, optstring, opt);
+			if ((opt = ft_strchr(optstring, argv[(uintptr_t)optind][arg_i])) != NULL)
+				return (ft_getopt_valid(argv, optstring, opt, arg_i));
 			// The option is invalid
 			else
 			{
-				ft_getopt_error((char*)argv[0], "illegal option");
+				optopt = argv[(uintptr_t)optind][arg_i];
 				++optind;
-				result = '?';
+				ft_getopt_error((char*)argv[0], "illegal option", optstring);
+				return('?');
 			}
 			++arg_i;
 		}
-		++optind;
-		return (result);
 	}
 	// Argument list exhausted
-	++optind;
 	return (-1);
 }
