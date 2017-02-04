@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 00:22:27 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/02/03 22:32:14 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/02/04 10:43:11 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,25 @@ void		ft_getopt_error(char *name, char *error, const char *optstring)
 }
 
 static int		ft_getopt_valid(char *const argv[], const char *optstring,
-								char *opt, int arg_i)
+								char *opt, int *arg_i)
 {
-	optopt = argv[(uintptr_t)optind][arg_i];
+	optopt = argv[(uintptr_t)optind][*arg_i];
 	// The option take an argument
 	if (opt[1] == ':')
 	{
 		// The option has an argument without a whitespace
-		if (argv[(uintptr_t)optind][arg_i + 1])
-			optarg = (char*)argv[(uintptr_t)optind++] + arg_i + 1;
+		if (argv[(uintptr_t)optind][*arg_i + 1])
+		{
+			optarg = (char*)argv[(uintptr_t)optind] + *arg_i + 1;
+			++optind;
+			*arg_i = 1;
+		}
 		// The option has an arguement with a whitespace
 		else if (argv[(uintptr_t)optind + 1])
 		{
 			++optind;
 			optarg = (char*)argv[(uintptr_t)optind++];
+			*arg_i = 1;
 		}
 		// The option should have had an arguemnt
 		else
@@ -61,11 +66,14 @@ static int		ft_getopt_valid(char *const argv[], const char *optstring,
 	{
 		optarg = NULL;
 		// There are other option left to process in this argument
-		if (argv[(uintptr_t)optind][arg_i + 1])
-			++arg_i;
+		if (argv[(uintptr_t)optind][*arg_i + 1])
+			++(*arg_i);
 		// This is the last option in this argument
 		else
+		{
 			++optind;
+			*arg_i = 1;
+		}
 	}
 	return (optopt);
 }
@@ -75,9 +83,11 @@ int		ft_getopt(int argc, char *const argv[], const char *optstring)
 	static int	arg_i = 1;
 	char		*opt;
 
-	ft_getopt_reset();
 	if (optreset == 1)
+	{
 		optreset = 0;
+		arg_i = 1;
+	}
 	if (ft_strequ(argv[(uintptr_t)optind], "--"))
 	{
 		++optind;
@@ -90,12 +100,13 @@ int		ft_getopt(int argc, char *const argv[], const char *optstring)
 		{
 			// The option is valid
 			if ((opt = ft_strchr(optstring, argv[(uintptr_t)optind][arg_i])) != NULL)
-				return (ft_getopt_valid(argv, optstring, opt, arg_i));
+				return (ft_getopt_valid(argv, optstring, opt, &arg_i));
 			// The option is invalid
 			else
 			{
 				optopt = argv[(uintptr_t)optind][arg_i];
-				++optind;
+				if (optopt != '-')
+					++optind;
 				ft_getopt_error((char*)argv[0], "illegal option", optstring);
 				return('?');
 			}
