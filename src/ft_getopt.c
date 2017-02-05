@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 00:22:27 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/02/04 11:48:43 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/02/05 12:49:00 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,35 @@ void			ft_getopt_error(char *name, char *error, const char *optstring)
 	}
 }
 
-static int		ft_getopt_valid(char *const argv[], const char *optstring,
-								char *opt, int *arg_i)
+static int		ft_getopt_arg(char *const argv[], const char *optstring,
+								int *arg_i)
 {
-	optopt = argv[(uintptr_t)optind][*arg_i];
-	if (opt[1] == ':')
-	{
-		if (argv[(uintptr_t)optind][*arg_i + 1])
-		{
-			optarg = (char*)argv[(uintptr_t)optind] + *arg_i + 1;
-			++optind;
-			*arg_i = 1;
-		}
-		else if (argv[(uintptr_t)optind + 1])
-		{
-			++optind;
-			optarg = (char*)argv[(uintptr_t)optind++];
-			*arg_i = 1;
-		}
-		else
-		{
-			ft_getopt_error((char*)argv[0], "option requires an argument", optstring);
-			optind += 2;
-			optarg = NULL;
-			return ((optstring[0] == ':' ? ':' : '?'));
-		}
-	}
+	if (argv[(uintptr_t)optind][*arg_i + 1])
+		optarg = (char*)argv[(uintptr_t)optind] + *arg_i + 1;
+	else if (argv[(uintptr_t)optind + 1])
+		optarg = (char*)argv[(uintptr_t)++optind];
 	else
 	{
+		ft_getopt_error((char*)argv[0], "option requires an argument",
+						optstring);
+		optind += 2;
 		optarg = NULL;
-		if (argv[(uintptr_t)optind][*arg_i + 1])
-			++(*arg_i);
-		else
-		{
-			++optind;
-			*arg_i = 1;
-		}
+		return ((optstring[0] == ':' ? ':' : '?'));
+	}
+	++optind;
+	*arg_i = 1;
+	return (optopt);
+}
+
+static int		ft_getopt_noarg(char *const argv[], int *arg_i)
+{
+	optarg = NULL;
+	if (argv[(uintptr_t)optind][*arg_i + 1])
+		++(*arg_i);
+	else
+	{
+		++optind;
+		*arg_i = 1;
 	}
 	return (optopt);
 }
@@ -78,11 +71,16 @@ static	int		ft_getopt_parse(char *const argv[], const char *optstring,
 
 	while (argv[(uintptr_t)optind][*arg_i])
 	{
+		optopt = argv[(uintptr_t)optind][*arg_i];
 		if ((opt = ft_strchr(optstring, argv[(uintptr_t)optind][*arg_i])))
-			return (ft_getopt_valid(argv, optstring, opt, arg_i));
+		{
+			if (opt[1] == ':')
+				return (ft_getopt_arg(argv, optstring, arg_i));
+			else
+				return (ft_getopt_noarg(argv, arg_i));
+		}
 		else
 		{
-			optopt = argv[(uintptr_t)optind][*arg_i];
 			if (optopt != '-')
 				++optind;
 			ft_getopt_error((char*)argv[0], "illegal option", optstring);

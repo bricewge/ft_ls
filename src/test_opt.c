@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/29 21:44:43 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/02/03 22:17:27 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/02/05 12:45:22 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void print_getopt(int opt)
 {
-	printf("opterr: %d,\toptind: %d,\toptopt: %c,\toptreset: %d,\toptarg: %s,\t return: %c\n",
+	printf("opterr: %d,\toptind: %d,\toptopt: %c,\toptreset: %d,\toptarg: %s,\t return: %d\n",
 		   opterr, optind, optopt, optreset, optarg, opt);
 }
 
