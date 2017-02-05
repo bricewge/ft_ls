@@ -6,7 +6,7 @@
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:40:18 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/29 00:15:35 by bwaegene         ###   ########.fr       */
+/*   Updated: 2017/02/05 12:52:58 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,6 @@ int						ft_sqrt(int nb);
 
 char					*ft_strjoinf(char const *s1, char const *s2, int nb);
 char					*ft_basename(char *path);
+int						ft_getopt(int argc, char *const argv[],
+									const char *optstring);
 #endif

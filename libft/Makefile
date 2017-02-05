@@ -6,7 +6,7 @@
 #    By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/18 09:48:23 by bwaegene          #+#    #+#              #
-#    Updated: 2017/01/29 00:18:40 by bwaegene         ###   ########.fr        #
+#    Updated: 2017/02/05 12:58:00 by bwaegene         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -88,7 +88,8 @@ SRC_NAME =	ft_atoi.c		\
 						ft_tolower.c	\
 						ft_toupper.c	\
 						ft_strjoinf.c			\
-						ft_basename.c
+						ft_basename.c			\
+						ft_getopt.c
 OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
