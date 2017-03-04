@@ -26,8 +26,27 @@
 
 typedef	struct dirent	t_dirent;
 typedef	struct stat		t_stat;
+typedef struct s_dircont
+{
+	char				*mode;
+	char				*links;
+	char				*user;
+	char				*group;
+	char				*size;
+	char				*mtime;
+	char				*name;
+	struct s_dircont	*next;
+}						t_dircont;
+
 void	usage(char *options);
 
 void	error(char *name, char *path);
 char	*file_mode(mode_t mode);
+char	file_type(mode_t mode);
+/*
+** Prototypes draft
+*/
+void	list_one(char *path);
+void	list_long(char *path);
+
 #endif
