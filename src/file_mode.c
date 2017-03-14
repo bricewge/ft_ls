@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-static char	file_mode_type(mode_t mode)
+char	file_type(mode_t mode)
 {
 	if (S_ISDIR(mode))
 		return ('d');
@@ -33,8 +33,8 @@ char		*file_mode(mode_t mode)
 {
 	char	*result;
 
-	result = ft_strdup("----------");
-	result[0] = file_mode_type(mode);
+	result = ft_strdup("---------- ");
+	result[0] = file_type(mode);
 	if (mode & S_IRUSR)
 		result[1] = 'r';
 	if (mode & S_IWUSR)

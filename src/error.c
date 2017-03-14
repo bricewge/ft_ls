@@ -10,20 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "ft_ls.h"
 
 /*
 ** Display error in a identical way as ls.
 */
 
-void	error(char *name, char *path)
+int		error(char *name, char *path)
 {
 	int		fd;
 	char	*tmp;
 
 	fd = 2;
-	ft_putstr_fd(name, fd);
-	ft_putstr_fd(": ", fd);
+	if (name)
+	{
+		ft_putstr_fd(name, fd);
+		ft_putstr_fd(": ", fd);
+	}
 	if (path)
 	{
 		if (errno == ENOENT || errno == ENOTDIR)
@@ -36,8 +40,7 @@ void	error(char *name, char *path)
 		}
 		ft_putstr_fd(": ", fd);
 	}
-    tmp = strerror(errno);
-	ft_putendl_fd(tmp, fd);
-	free(tmp);
-	exit (1);
+	perror(NULL);
+	errno = 0;
+	return (0);
 }

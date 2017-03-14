@@ -40,7 +40,7 @@ typedef struct s_dircont
 
 void	usage(char *options);
 
-void	error(char *name, char *path);
+int		error(char *name, char *path);
 char	*file_mode(mode_t mode);
 char	file_type(mode_t mode);
 /*
