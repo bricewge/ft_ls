@@ -2,3 +2,8 @@
 /inspect_file
 /ft_ls
 /test_opt
+/list_recur
+.DS_Store
+*.a
+*.dSYM/
+obj/

@@ -31,7 +31,7 @@ the operands by lexicographical order.
 Enable colorized output.  This option is equivalent to defining
 CLICOLOR in the environment.  (See below.)
 #+END_SRC
-*** ACL
+*** ACLs
 *** flag =-u=
 #+BEGIN_SRC man
  Use time of last access, instead of last modification of the file for
@@ -52,6 +52,16 @@ name is suppressed).
 Directories are listed as plain files (not searched recursively).
 #+END_SRC
 *** optimize speed for =ls - lR=
+** TODO Roadmap
+*** DONE Recursivly list subdirs
+*** TODO Sort dir contents [0/6]
+- [ ] lexicographicly
+- [ ] lexicographicly reversed
+- [ ] modified time
+- [ ] modified time reversed
+- [ ] access time
+- [ ] access time reversed
+
 ** TODO Read man
 *** opendir / readdir / closedir 
 *** stat / lstat
@@ -60,8 +70,10 @@ Directories are listed as plain files (not searched recursively).
 *** readlink
 *** perror / strerror
 *** ls
-** TODO mini sub-projects
-*** TODO list the contents of a directory
+** DONE mini sub-projects
+   CLOSED: [2017-03-03 Fri 21:29]
+*** DONE list the contents of a directory
+    CLOSED: [2017-03-03 Fri 21:29]
 EÉcrire un programme qui utilise les fonctions =opendir=, =readdir= et
 =closedir= pour ouvrir un répertoire et lister les noms de ce qu’il contient sur
 la console.
@@ -76,7 +88,8 @@ tyty
 $>
 #+END_SRC
 
-*** TODO get informations on a file
+*** DONE get informations on a file
+    CLOSED: [2017-03-03 Fri 21:29]
 ÉEcrire un programme qui prend un fichier en paramètre et utilise, entre autres,
 la fonction =stat= pour obtenir des informations sur ce fichier et les afficher
 à l’écran.
@@ -94,3 +107,23 @@ $>
 #+END_SRC
 Vous allez devoir utiliser plusieurs fonctions, données en début de ce document,
 afin d’interpréter les informations renvoyées par =stat=.
+** Notes
+*** order of display based on type
+1. Errors
+2. Non directories
+3. Directories
+#+BEGIN_SRC sh
+$ ls test/ Makefile INVALID ana
+ls: INVALID: No such file or directory
+ls: ana: No such file or directory
+Makefile
+
+test/:
+chmod000	dir		error.sh	getopt.sh	list_dir	symlink_dir
+#+END_SRC
+*** order of doing things
+1. Test options
+2. Order operands based on their type
+3. Print the result 
+** Ressources
+- [[http://pubs.opengroup.org/onlinepubs/9699919799/][POSIX specifications for ls]]
