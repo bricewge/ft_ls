@@ -51,8 +51,11 @@ $(NAME): $(LIB)/$(LIB).a $(OBJ)
 list_dir: $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(HEADER) $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(LIB)/$(LIB).a -o list_dir
 
-inspect_file: $(SRC_PATH)/inspect_file.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< $(LIB)/$(LIB).a -o $@
+list_recur: $(SRC_PATH)/list_recur.c $(SRC_PATH)/file_mode.c  $(SRC_PATH)/error.c $(HEADER) $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/list_recur.c $(SRC_PATH)/file_mode.c $(SRC_PATH)/error.c $(LIB)/$(LIB).a -o list_recur
+
+inspect_file: $(SRC_PATH)/inspect_file.c src/file_mode.c $(HEADER) $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< src/file_mode.c $(LIB)/$(LIB).a -o $@
 
 test_opt: $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/ft_getopt.c $(HEADER) $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/ft_getopt.c $(LIB)/$(LIB).a -o $@
