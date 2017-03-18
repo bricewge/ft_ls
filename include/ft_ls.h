@@ -25,28 +25,20 @@
 # include "libft.h"
 
 typedef	struct dirent	t_dirent;
+typedef struct timespec	t_timespec;
 typedef	struct stat		t_stat;
-typedef struct s_dircont
+typedef struct			s_ls
 {
-	char				*mode;
-	char				*links;
-	char				*user;
-	char				*group;
-	char				*size;
-	char				*mtime;
-	char				*name;
-	struct s_dircont	*next;
-}						t_dircont;
+	t_dirent			dirent;
+	t_stat				stat;
+}						t_ls;
 
-void	usage(char *options);
+void					usage(char *options);
 
-int		error(char *name, char *path);
-char	*file_mode(mode_t mode);
-char	file_type(mode_t mode);
-/*
-** Prototypes draft
-*/
-void	list_one(char *path);
-void	list_long(char *path);
+int						error(char *name, char *path);
+char					*file_mode(mode_t mode);
+char					file_type(mode_t mode);
 
+void					display_one(t_ls *entry, int length);
+void					display_long(t_ls *entry, int lenght);
 #endif
