@@ -30,7 +30,7 @@ int 	listl_recur(char *dirname, char *progname)
 	{
 		while ((dp = readdir(dirp)) != NULL)
 		{
-			if ( !(ft_strequ(dp->d_name, ".") || ft_strequ(dp->d_name, "..") ))
+			if ( !(ft_strequ(dp->d_name, ".") || ft_strequ(dp->d_name, "..")) )
 			{
 				nextdir = ft_strjoin(dirname, "/");
 				nextdir = ft_strjoinf(nextdir, dp->d_name, 1);
@@ -47,10 +47,9 @@ int 	listl_recur(char *dirname, char *progname)
 				free(nextdir);
 			}
 		}
+		closedir(dirp);
 		if (errno != 0)
 			return (error(progname, dirname));
-		else
-			closedir(dirp);
 	}
 	return(0);
 }

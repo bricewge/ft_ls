@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char *listl_time(time_t clock)
+char		*listl_time(time_t clock)
 {
 	char *mtime;
 	char *result;
@@ -29,7 +29,7 @@ char *listl_time(time_t clock)
 	return(result);
 }
 
-void	*listl_display(t_stat buf)
+void		*listl_display(t_stat buf)
 {
 	ft_putstr(file_mode((buf.st_mode)));
 	ft_putchar(' ');
@@ -46,6 +46,11 @@ void	*listl_display(t_stat buf)
 	ft_putendl(av[1]);
 }
 
+t_dircont	listl_store(char *contname)
+{
+	
+}
+
 int		main(int ac, char **av)
 {
 	t_stat	buf;
@@ -54,8 +59,30 @@ int		main(int ac, char **av)
 	{
 		if (stat(av[1], &buf) == 0)
 		{
+
 			listl_display(buf);
 		}
+	}
+	return (0);
+}
+
+int		main(int ac, char **av)
+{
+	DIR			*dirp;
+	t_dirent	*dp;
+
+	if (ac == 2)
+	{
+		dirp = opendir(av[1]);
+		if (errno != 0)
+			error(av[0], av[1]);
+		while ((dp = readdir(dirp)) != NULL)
+			if (*(dp->d_name) != '.')
+			{
+				listl_store(dp->d_name);
+			}
+		if (errno != 0)
+			error(av[0], av[1]);
 	}
 	return (0);
 }
