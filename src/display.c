@@ -12,6 +12,7 @@
 
 #include "ft_ls.h"
 
+// TODO fix leaks, memory mismanaged
 static char	*timetostr(time_t clock)
 {
 	char *mtime;
@@ -19,12 +20,16 @@ static char	*timetostr(time_t clock)
 
 	mtime = ctime(&clock);
 	result = ft_strnew(12);
-	if (time(NULL) - clock < 15768000)
-		result = ft_strsub(mtime, 4, 12);
-	else
+	if (mtime != NULL && result != NULL)
 	{
-		result = ft_strsub(mtime, 4, 7);
-		ft_strcpy(result + 7, ft_strsub(mtime, 19, 5));
+		if (time(NULL) - clock < 15768000)
+			result = ft_strsub(mtime, 4, 12);
+		else
+		{
+			result = ft_strsub(mtime, 4, 7);
+			ft_strcpy(result + 7, ft_strsub(mtime, 19, 5));
+		}
+		/* free(mtime); */
 	}
 	return (result);
 }
@@ -38,10 +43,32 @@ void		display_one(t_ls *entry, int length)
 		ft_putendl(entry[i].dirent.d_name);
 }
 
-void		display_long(t_ls *entry, int length)
+static void	display_block(t_ls *entry, int length)
 {
 	int i;
+	int total;
 
+	i = -1;
+	total = 0;
+	while (++i < length)
+	{
+		total += entry[i].stat.st_blocks;
+	}
+	ft_putstr("total: ");
+	ft_putnbr(total);
+	ft_putchar('\n');
+}
+
+/*
+** TODO Display link if it is a symlink.
+*/
+
+void		display_long(t_ls *entry, int length)
+{
+	int		i;
+	char	*time;
+
+	display_block(entry, length);
 	i = -1;
 	while (++i < length)
 	{
@@ -55,7 +82,9 @@ void		display_long(t_ls *entry, int length)
 		ft_putstr("  ");
 		ft_putnbr(entry[i].stat.st_size);
 		ft_putchar(' ');
-		ft_putstr(timetostr(entry[i].stat.st_mtime));
+		time = timetostr(entry[i].stat.st_mtime);
+		ft_putstr(time);
+		free(time);
 		ft_putchar(' ');
 		ft_putendl(entry[i].dirent.d_name);
 	}

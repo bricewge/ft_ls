@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,40 @@
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+t_opt		options(t_opt *opts)
 {
-	int		i;
+	static t_opt	result = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-	progname(av[0]);
-	opt_parse(&ac, &av);
-	i = 0;
-	ft_putnbr(ac);
-	while (ac > i)
-		dirent(av[i++]);
-	if (ac == 0)
-		dirent(".");
-	return (0);
+	if (opts != NULL)
+		result = *opts;
+	return (result);
+}
+
+void		opt_parse(int *ac, char ***av)
+{
+	int		opt;
+	t_opt	opts;
+
+	opts = options(NULL);
+	while ((opt = ft_getopt(*ac, *av, OPTIONS)) != -1)
+	{
+		if (opt == 'R')
+			opts.recur = 1;
+		else if (opt == 'a')
+			opts.all = 1;
+		else if (opt == 'l')
+		{
+			opts.dlong = 1;
+			opts.done = 0;
+		}
+		else if (opt == 'r')
+			opts.sortrev = 1;
+		else if (opt == 't')
+			opts.sortmtime = 1;
+		else
+			usage(OPTIONS);
+	}
+	options(&opts);
+	*ac -= optind;
+	*av += optind;
 }

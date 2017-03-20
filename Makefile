@@ -30,6 +30,9 @@ SRC_NAME =	usage.c			\
 						file_mode.c	\
 						error.c			\
 						display.c		\
+						options.c		\
+						dirent.c		\
+						sort.c			\
 						ft_ls.c
 OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -58,8 +61,8 @@ list_recur: $(SRC_PATH)/list_recur.c $(SRC_PATH)/file_mode.c $(SRC_PATH)/error.c
 inspect_file: $(SRC_PATH)/inspect_file.c src/file_mode.c $(HEADER) $(LIB)/$(LIB).a
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< src/file_mode.c -o $@
 
-test_opt: $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/ft_getopt.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/ft_getopt.c -o $@
+test_opt: $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(HEADER) $(LIB)/$(LIB).a
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/src/misc/ft_getopt.c -o $@
 
 
 $(OBJ_PATH):

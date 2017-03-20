@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 19:24:35 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/27 20:08:00 by bwaegene         ###   ########.fr       */
+/*   Created: 2017/01/27 12:46:05 by bwaegene          #+#    #+#             */
+/*   Updated: 2017/01/29 01:13:52 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
-{
-	int		i;
+/*
+** Put the operand which are a file to a array of t_ls and display them. The
+** directory ones are sorted and displayed with a header
+*/
 
-	progname(av[0]);
-	opt_parse(&ac, &av);
-	i = 0;
-	ft_putnbr(ac);
-	while (ac > i)
-		dirent(av[i++]);
-	if (ac == 0)
-		dirent(".");
-	return (0);
+void	oper_parse(int ac, char **av)
+{
+
 }
