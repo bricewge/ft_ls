@@ -62,6 +62,9 @@ Directories are listed as plain files (not searched recursively).
 - [ ] access time
 - [ ] access time reversed
 
+*** TODO Rewrite libc functions
+**** scandir
+**** qsort
 ** TODO Read man
 *** opendir / readdir / closedir 
 *** stat / lstat

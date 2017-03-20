@@ -5,5 +5,6 @@
 /list_recur
 .DS_Store
 *.a
+*.o
 *.dSYM/
 obj/
