@@ -53,6 +53,7 @@ SRC_NAME =	ctype/ft_isalnum.c					\
 						stdio/ft_putstr.c						\
 						stdio/ft_putstr_fd.c				\
 						stdlib/ft_atoi.c						\
+						stdlib/ft_abs.c							\
 						string/ft_bzero.c						\
 						string/ft_memccpy.c					\
 						string/ft_memchr.c					\
@@ -116,11 +117,19 @@ $(OBJ): | $(OBJ_PATHS)
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADER)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
+.PHONY: test
+test:
+	$(MAKE) -C test test
+
 .PHONY: clean
 clean:
+	$(MAKE) -C lib/libunit clean
+	$(MAKE) -C test clean
 	$(RM) -r $(OBJ_PATH)
 
 fclean: clean
+	$(MAKE) -C lib/libunit fclean
+	$(MAKE) -C test fclean
 	$(RM) -r $(NAME) $(NAME).dSYM
 
 re: fclean

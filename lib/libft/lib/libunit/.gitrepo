@@ -4,8 +4,8 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:bricewge/libft.git
+	remote = git@github.com:bricewge/libunit.git
 	branch = master
-	commit = 9361eb0e5f228bc2e510ce5251922803056e5f78
-	parent = 667b20afed52b1b4fab16f216e70c1cd1de41297
+	commit = abea1e5561322b6e83325c57aac22430eb3c8f85
+	parent = 923d13f8ec4f1162fd582ae7f3f99584fa405feb
 	cmdver = 0.3.1

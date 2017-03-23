@@ -113,4 +113,5 @@ char					*ft_strjoinf(char const *s1, char const *s2, int nb);
 char					*ft_basename(char *path);
 int						ft_getopt(int argc, char *const argv[],
 									const char *optstring);
+int						ft_abs(int i);
 #endif
