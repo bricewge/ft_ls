@@ -26,13 +26,15 @@ NAME = ft_ls
 
 # Project related variables
 SRC_PATH =  src
-SRC_NAME =	usage.c			\
-						file_mode.c	\
-						error.c			\
-						display.c		\
-						options.c		\
-						dirent.c		\
-						sort.c			\
+SRC_NAME =	usage.c					\
+						file_mode.c			\
+						error.c					\
+						display_long.c	\
+						display_one.c		\
+						options.c				\
+						dirent.c				\
+						sort.c					\
+						padding.c				\
 						ft_ls.c
 OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   list_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwaegene <bwaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 19:24:35 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/01/27 20:08:00 by bwaegene         ###   ########.fr       */
+/*   Created: 2017/01/27 12:46:05 by bwaegene          #+#    #+#             */
+/*   Updated: 2017/01/29 01:13:52 by bwaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+void		display_one(t_ls *entry, int length)
 {
-	int		i;
+	int i;
 
-	progname(av[0]);
-	opt_parse(&ac, &av);
-	i = 0;
-	while (ac > i)
-		dirent(av[i++]);
-	if (ac == 0)
-		dirent(".");
-	return (0);
+	i = -1;
+	while (++i < length)
+		ft_putendl(entry[i].dirent.d_name);
 }

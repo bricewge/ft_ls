@@ -93,17 +93,17 @@ void	dirent(char *dirname)
 	opts = options(NULL);
 	length = dirent_cnt(dirname);
 	dircont = dir_store(dirname, length);
-	if (opts.sortmtime)
-		qsort(dircont, length, sizeof(*dircont), mtimecmp);
+	if (opts.sortno)
+		;
 	else if (opts.sortatime)
 		qsort(dircont, length, sizeof(*dircont), atimecmp);
-	else if (opts.sortno)
-		;
+	else if (opts.sortmtime)
+		qsort(dircont, length, sizeof(*dircont), mtimecmp);
 	else
 		qsort(dircont, length, sizeof(*dircont), alphacmp);
 	if (opts.done)
 		display_one(dircont, length);
 	else if (opts.dlong)
-		display_long(dircont, length);
+		display_long(dircont, length, dirname);
 	free(dircont);
 }
