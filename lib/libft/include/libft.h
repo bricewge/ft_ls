@@ -114,4 +114,5 @@ char					*ft_basename(char *path);
 int						ft_getopt(int argc, char *const argv[],
 									const char *optstring);
 int						ft_abs(int i);
+int						ft_nbrlen(int nbr);
 #endif

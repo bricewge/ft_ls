@@ -40,6 +40,7 @@ SRC_NAME =	ctype/ft_isalnum.c					\
 						list/ft_lstmap.c						\
 						list/ft_lstnew.c						\
 						malloc/ft_memalloc.c				\
+						math/ft_nbrlen.c						\
 						math/ft_range.c							\
 						math/ft_sqrt.c							\
 						misc/ft_basename.c					\

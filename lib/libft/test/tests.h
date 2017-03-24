@@ -33,4 +33,8 @@ void		ft_abs_launcher(int *res_test);
 int			ft_abs_positive_test(void);
 int			ft_abs_negative_test(void);
 int			ft_abs_zero_test(void);
+void		ft_nbrlen_launcher(int *res_test);
+int			ft_nbrlen_positive_test(void);
+int			ft_nbrlen_negative_test(void);
+int			ft_nbrlen_zero_test(void);
 #endif

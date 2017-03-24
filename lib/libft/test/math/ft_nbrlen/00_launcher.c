@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   00_launcher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwaegene <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/11 14:20:14 by bwaegene          #+#    #+#             */
-/*   Updated: 2017/02/12 16:09:46 by starrit          ###   ########.fr       */
+/*   Created: 2017/02/11 13:36:58 by bwaegene          #+#    #+#             */
+/*   Updated: 2017/02/12 16:11:56 by starrit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 #include "libunit.h"
 
-int	main(void)
+void		ft_nbrlen_launcher(int *res_test)
 {
-	int	res_test[2];
+	t_test *testlist;
 
-	res_test[0] = 0;
-	res_test[1] = 0;
-	print_header();
-	ft_atoi_launcher(res_test);
-	ft_abs_launcher(res_test);
-	ft_nbrlen_launcher(res_test);
-	return (print_total(res_test));
+	testlist = NULL;
+	ft_putendl("FT_NBRLEN:");
+	load_test(&testlist, "Positive", &ft_nbrlen_positive_test);
+	load_test(&testlist, "Negative", &ft_nbrlen_negative_test);
+	load_test(&testlist, "Zero", &ft_nbrlen_zero_test);
+	launch_tests(&testlist, res_test);
+	del_test_lst(&testlist);
 }
