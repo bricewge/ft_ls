@@ -142,7 +142,8 @@ void		display_long(t_ls *entry, int length, char *dirname)
 	int		padlen[4];
 
 	padsize(entry, length, padlen);
-	display_blocks(entry, length);
+	if (length > 0)
+		display_blocks(entry, length);
 	i = -1;
 	while (++i < length)
 		putlongls(entry[i], dirname, padlen);

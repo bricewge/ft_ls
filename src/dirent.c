@@ -73,7 +73,7 @@ t_ls	*dir_store(char *dirname, int length)
 	dirp = opendir(dirname);
 	error(dirname);
 	entry = (t_ls*)malloc(sizeof(*entry) * length);
-	if (entry != NULL)
+	if (entry != NULL && dirp)
 	{
 		i = 0;
 		while (i < length && (dp = readdir(dirp)) != NULL)
@@ -82,6 +82,26 @@ t_ls	*dir_store(char *dirname, int length)
 		error(dirname);
 	}
 	return(entry);
+}
+
+void	dirent_recur(t_ls *dircont, int length, char *dirname)
+{
+	int i;
+	char *path;
+
+	i = -1;
+	while (++i < length)
+	{
+		if (file_type(dircont[i].stat.st_mode) == 'd')
+		{
+			path = ft_pathjoin(dirname, dircont[i].dirent.d_name);
+			ft_putchar('\n');
+			ft_putstr(path);
+			ft_putendl(":");
+			dirent(path);
+			free(path);
+		}
+	}
 }
 
 void	dirent(char *dirname)
@@ -105,5 +125,7 @@ void	dirent(char *dirname)
 		display_one(dircont, length);
 	else if (opts.dlong)
 		display_long(dircont, length, dirname);
+	if (opts.recur)
+		dirent_recur(dircont, length, dirname);
 	free(dircont);
 }

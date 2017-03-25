@@ -20,6 +20,7 @@ int		main(int ac, char **av)
 	opt_parse(&ac, &av);
 	i = 0;
 	while (ac > i)
+		// Sort garument
 		dirent(av[i++]);
 	if (ac == 0)
 		dirent(".");
