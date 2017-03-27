@@ -23,7 +23,7 @@
 # include <pwd.h>
 # include <time.h>
 # include "libft.h"
-# define OPTIONS "Ralrt"
+# define OPTIONS "1Ralrt"
 
 typedef	struct dirent	t_dirent;
 typedef struct timespec	t_timespec;
@@ -67,7 +67,7 @@ int						alphacmp(const void *p1, const void *p2);
 int						mtimecmp(const void *p1, const void *p2);
 int						atimecmp(const void *p1, const void *p2);
 
-void					dirent(char *dirname);
+void					dirent(char *dirname, int ac);
 int						dirent_cnt(char *dirname);
 t_ls					*dir_store(char *dirname, int length);
 
@@ -75,6 +75,7 @@ char					*padding(char *str, int len, int pos);
 void					putstrp(char *str, int len, int pos);
 void					putnbrp(int nbr, int len, int pos);
 void					padsize(t_ls *entry, int length, int *padlen);
+void					putdirname(char *dir, int *first);
 
 char					*ft_pathjoin(const char *dir, const char *file);
 #endif

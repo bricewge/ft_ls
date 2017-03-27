@@ -33,6 +33,11 @@ void		opt_parse(int *ac, char ***av)
 			opts.recur = 1;
 		else if (opt == 'a')
 			opts.all = 1;
+		else if (opt == '1')
+		{
+			opts.dlong = 0;
+			opts.done = 1;
+		}
 		else if (opt == 'l')
 		{
 			opts.dlong = 1;

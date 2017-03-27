@@ -58,7 +58,7 @@ t_ls	*dir_store(char *dirname, int length)
 	{
 		while (++i < length && (dp = readdir(dirp)) != NULL)
 		{
-			if (stat(dp->d_name, &buf) == 0)
+			if (lstat(dp->d_name, &buf) == 0)
 				dirent_store(&entry[i], &buf, dp);
 			else
 				error(dp->d_name);

@@ -109,6 +109,16 @@ void		putmajmin(t_ls entry)
 	putnbrp(minor(entry.stat.st_rdev), 3, 1);
 }
 
+void putdirname(char *dir, int *first)
+{
+	if (*first == 0)
+		*first = 1;
+	else
+		ft_putchar('\n');
+	ft_putstr(dir);
+	ft_putendl(":");
+}
+
 /*
 ** Display one line in the long format.
 */
@@ -141,10 +151,14 @@ void		display_long(t_ls *entry, int length, char *dirname)
 	int		i;
 	int		padlen[4];
 
+	i = -1;
 	padsize(entry, length, padlen);
 	if (length > 0)
 		display_blocks(entry, length);
-	i = -1;
-	while (++i < length)
-		putlongls(entry[i], dirname, padlen);
+	if (options(NULL).sortrev == 0)
+		while (++i < length)
+			putlongls(entry[i], dirname, padlen);
+	else
+		while (length)
+			putlongls(entry[--length], dirname, padlen);
 }
