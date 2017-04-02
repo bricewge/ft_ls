@@ -63,6 +63,8 @@ SRC_NAME =	ctype/ft_isalnum.c					\
 						string/ft_memdel.c					\
 						string/ft_memmove.c					\
 						string/ft_memset.c					\
+						string/ft_reverse.c					\
+						string/ft_swap.c						\
 						string/ft_strcat.c					\
 						string/ft_strchr.c					\
 						string/ft_strclr.c					\

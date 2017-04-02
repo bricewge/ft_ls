@@ -104,7 +104,6 @@ t_list					*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int						ft_isspace(int c);
 int						ft_isupper(int c);
 int						ft_islower(int c);
-void					ft_swap(int *a, int *b);
 void					ft_strswap(char **a, char **b);
 int						*ft_range(int min, int max);
 int						ft_sqrt(int nb);
@@ -115,4 +114,6 @@ int						ft_getopt(int argc, char *const argv[],
 									const char *optstring);
 int						ft_abs(int i);
 int						ft_nbrlen(int nbr);
+void					ft_swap(void *a, void *b, size_t size);
+void					ft_reverse(void *base, size_t nel, size_t width);
 #endif
