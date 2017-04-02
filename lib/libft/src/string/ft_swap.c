@@ -16,6 +16,8 @@ void	ft_swap(void *p1, void *p2, size_t size)
 {
 	void *tmp;
 
+	if (p1 == NULL || p2 == NULL || size <= 0)
+		return;
 	tmp = (void *)malloc(size);
 	if (tmp)
 	{

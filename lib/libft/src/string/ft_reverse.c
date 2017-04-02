@@ -21,6 +21,8 @@ void	ft_reverse(void *base, size_t nel, size_t width)
 {
 	size_t	i;
 
+	if (base == NULL || nel <= 1 || width <= 0)
+		return;
 	i = -1;
 	while (++i <= --nel)
 		ft_swap(base + (i * width), base + (nel * width), sizeof(width));
