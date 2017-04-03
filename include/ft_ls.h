@@ -61,7 +61,8 @@ void					opt_parse(int *ac, char ***av);
 
 void					display(char *av);
 void					display_one(t_ls *entry, int length);
-void					display_long(t_ls *entry, int lenght, char *dirname);
+void					display_long(t_ls *entry, int lenght, char *dirname,
+										int block);
 
 int						alphacmp(const void *p1, const void *p2);
 int						mtimecmp(const void *p1, const void *p2);
@@ -77,5 +78,8 @@ void					putnbrp(int nbr, int len, int pos);
 void					padsize(t_ls *entry, int length, int *padlen);
 void					putdirname(char *dir, int *first);
 
+void					arg_sort(int argc, char ***argv);
+
 char					*ft_pathjoin(const char *dir, const char *file);
+void					arg_files(int ac, char **argv);
 #endif

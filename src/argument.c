@@ -12,23 +12,30 @@
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+static int stringcmp(const void *p1, const void *p2)
 {
-	int		i;
+	char **c1;
+	char **c2;
 
-	progname(av[0]);
-	opt_parse(&ac, &av);
-	arg_sort(ac, &av);
-	arg_files(ac, av);
-	i = 0;
-	while (ac > i)
-	{
-		if (av[i] != NULL)
-			/* ft_putendl(av[i]); */
-			dirent(av[i], ac);
-		i++;
-	}
-	if (ac == 0)
-		dirent(".", ac);
-	return (0);
+	c1 = (char **)p1;
+	c2 = (char **)p2;
+	return (ft_strcmp(*c1, *c2));
+}
+
+
+void	arg_sort(int argc, char ***argv)
+{
+	t_opt	opt;
+
+	opt = options(NULL);
+	if (opt.sortno)
+		;
+	else if (opt.sortatime)
+		qsort(*argv, argc, sizeof(**argv), atimecmp);
+	else if (opt.sortmtime)
+		qsort(*argv, argc, sizeof(**argv), mtimecmp);
+	else
+		qsort(*argv, argc, sizeof(**argv), stringcmp);
+	if (opt.sortrev)
+		ft_reverse(*argv, argc, sizeof(*argv));
 }

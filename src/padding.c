@@ -62,7 +62,7 @@ void	padsize(t_ls *entry, int length, int *padlen)
 
 	i = -1;
 	while (++i < 4)
-		padlen[0] = 0;
+		padlen[i] = 0;
 	i = -1;
 	while (++i < length)
 	{

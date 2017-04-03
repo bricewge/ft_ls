@@ -17,10 +17,7 @@ void		display_one(t_ls *entry, int length)
 	int i;
 
 	i = -1;
-	if (options(NULL).sortrev == 0)
-		while (++i < length)
+	while (++i < length)
+		if (entry[i].dirent.d_name[0] != 0)
 			ft_putendl(entry[i].dirent.d_name);
-	else
-		while (length)
-			ft_putendl(entry[--length].dirent.d_name);
 }

@@ -8,7 +8,7 @@ ls ////dev///urandom
 ls -j ./
 ls -- -j ./
 ls INVALID Makefile TROLOLOL
-ls -lR /nfs/2016/c/csimon/Library/Application\ Support/Adobe/
+ls -lR "/nfs/2016/c/csimon/Library/Application Support/Adobe/"
 ls ~/goinfre
 ls -d ~/goinfre
 ls -l ~/goinfre

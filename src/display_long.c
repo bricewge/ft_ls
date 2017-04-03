@@ -109,7 +109,7 @@ void		putmajmin(t_ls entry)
 	putnbrp(minor(entry.stat.st_rdev), 3, 1);
 }
 
-void putdirname(char *dir, int *first)
+void		putdirname(char *dir, int *first)
 {
 	if (*first == 0)
 		*first = 1;
@@ -146,19 +146,16 @@ void		putlongls(t_ls entry, char *dirname, int *padlen)
 	ft_putchar('\n');
 }
 
-void		display_long(t_ls *entry, int length, char *dirname)
+void		display_long(t_ls *entry, int length, char *dirname, int block)
 {
 	int		i;
 	int		padlen[4];
 
 	i = -1;
 	padsize(entry, length, padlen);
-	if (length > 0)
+	if (length > 0 && block == 1)
 		display_blocks(entry, length);
-	if (options(NULL).sortrev == 0)
-		while (++i < length)
+	while (++i < length)
+		if (entry[i].dirent.d_name[0] != 0)
 			putlongls(entry[i], dirname, padlen);
-	else
-		while (length)
-			putlongls(entry[--length], dirname, padlen);
 }

@@ -128,10 +128,12 @@ void	dirent(char *dirname, int ac)
 		qsort(dircont, length, sizeof(*dircont), mtimecmp);
 	else
 		qsort(dircont, length, sizeof(*dircont), alphacmp);
+	if (opts.sortrev)
+		ft_reverse(dircont, length, sizeof(*dircont));
 	if (opts.done)
 		display_one(dircont, length);
 	else if (opts.dlong)
-		display_long(dircont, length, dirname);
+		display_long(dircont, length, dirname, 1);
 	if (opts.recur)
 	{
 		first = 1;

@@ -65,6 +65,15 @@ Directories are listed as plain files (not searched recursively).
 *** TODO Rewrite libc functions
 **** scandir
 **** qsort
+*** TODO 2017-04-02
+**** display files
+**** 
+1. Parse options
+2. Sort arguments
+3. List files arguments
+   - display 
+   - replace the argument by NULL
+4. List directory arguments
 ** TODO Read man
 *** opendir / readdir / closedir 
 *** stat / lstat

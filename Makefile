@@ -35,6 +35,8 @@ SRC_NAME =	usage.c					\
 						dirent.c				\
 						sort.c					\
 						padding.c				\
+						argument.c			\
+						display_file.c  \
 						ft_ls.c
 OBJ_PATH =  obj
 OBJ_NAME = $(SRC_NAME:.c=.o)
