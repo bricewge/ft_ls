@@ -74,6 +74,17 @@ Directories are listed as plain files (not searched recursively).
    - display 
    - replace the argument by NULL
 4. List directory arguments
+*** TODO Fix moulitest errors
+**** 07-(02,05,06) sort by mtime
+**** 08-06 mtime in 10 000
+touch -t 999912312459 future
+ls -lt
+**** 22
+***** 13
+**** 21 01,02
+mkdir a
+ln -s a b
+rm -rf a
 ** TODO Read man
 *** opendir / readdir / closedir 
 *** stat / lstat

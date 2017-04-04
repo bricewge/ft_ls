@@ -21,6 +21,18 @@ t_opt		options(t_opt *opts)
 	return (result);
 }
 
+int			opt_needstat(void)
+{
+	t_opt	opt;
+
+	opt = options(NULL);
+	if (opt.sortmtime == 1 || opt.sortatime == 1
+		|| opt.dlong == 1 || opt.recur == 1)
+		return (1);
+	else
+		return (0);
+}
+
 void		opt_parse(int *ac, char ***av)
 {
 	int		opt;

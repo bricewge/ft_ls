@@ -30,12 +30,6 @@ void	arg_sort(int argc, char ***argv)
 	opt = options(NULL);
 	if (opt.sortno)
 		;
-	else if (opt.sortatime)
-		qsort(*argv, argc, sizeof(**argv), atimecmp);
-	else if (opt.sortmtime)
-		qsort(*argv, argc, sizeof(**argv), mtimecmp);
 	else
 		qsort(*argv, argc, sizeof(**argv), stringcmp);
-	if (opt.sortrev)
-		ft_reverse(*argv, argc, sizeof(*argv));
 }

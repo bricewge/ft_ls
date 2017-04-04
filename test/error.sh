@@ -13,3 +13,6 @@ ls ~/goinfre
 ls -d ~/goinfre
 ls -l ~/goinfre
 ls -l ~/ ''
+ls - /Library/Scripts/42/munki
+ls -t /Library/Scripts/42/munki
+ls -lR /Library/Scripts/42/munki

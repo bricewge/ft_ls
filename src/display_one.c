@@ -18,6 +18,13 @@ void		display_one(t_ls *entry, int length)
 
 	i = -1;
 	while (++i < length)
-		if (entry[i].dirent.d_name[0] != 0)
+	{
+		if (opt_needstat())
+		{
+			if (entry[i].stat.st_ino != 0)
+				ft_putendl(entry[i].dirent.d_name);
+		}
+		else if (entry[i].dirent.d_name[0] != 0)
 			ft_putendl(entry[i].dirent.d_name);
+	}
 }

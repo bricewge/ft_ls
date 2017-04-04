@@ -47,16 +47,17 @@ static int	dirent_store(t_ls *entry, t_dirent *dirent, char *dirname)
 
 	if (options(NULL).all == 0 && *(dirent->d_name) == '.')
 		return (0);
-	path = ft_strjoin(dirname, "/");
-	path = ft_strjoinf(path, dirent->d_name, 1);
-	if (lstat(path, &buf) == 0)
+	entry->dirent = *dirent;
+	if (opt_needstat())
 	{
-		entry->dirent = *dirent;
-		entry->stat = buf;
+		path = ft_strjoin(dirname, "/");
+		path = ft_strjoinf(path, dirent->d_name, 1);
+		if (lstat(path, &buf) == 0)
+			entry->stat = buf;
+		else
+			error(dirent->d_name);
+		free(path);
 	}
-	else
-		error(dirent->d_name);
-	free(path);
 	return (1);
 }
 
@@ -128,13 +129,15 @@ void	dirent(char *dirname, int ac)
 		qsort(dircont, length, sizeof(*dircont), mtimecmp);
 	else
 		qsort(dircont, length, sizeof(*dircont), alphacmp);
+	/* else */
+	/* 	qsort(dircont, length, sizeof(*dircont), alphacmp); */
 	if (opts.sortrev)
 		ft_reverse(dircont, length, sizeof(*dircont));
 	if (opts.done)
 		display_one(dircont, length);
 	else if (opts.dlong)
 		display_long(dircont, length, dirname, 1);
-	if (opts.recur)
+	if (opts.recur == 1)
 	{
 		first = 1;
 		dirent_recur(dircont, length, dirname);

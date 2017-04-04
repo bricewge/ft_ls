@@ -35,17 +35,17 @@ typedef struct			s_ls
 }						t_ls;
 typedef struct			s_opt
 {
-	int 				dlong : 1;
-	int 				done : 1;
-	int 				recur : 1;
-	int 				all : 1;
-	int 				sortrev : 1;
-	int 				sortmtime : 1;
-	int 				sortatime : 1;
-	int 				color : 1;
-	int 				sortno : 1;
-	int 				dir : 1;
-	int 				grpname : 1;
+	unsigned int 		dlong : 1;
+	unsigned int 		done : 1;
+	unsigned int 		recur : 1;
+	unsigned int 		all : 1;
+	unsigned int 		sortrev : 1;
+	unsigned int 		sortmtime : 1;
+	unsigned int 		sortatime : 1;
+	unsigned int 		color : 1;
+	unsigned int 		sortno : 1;
+	unsigned int 		dir : 1;
+	unsigned int 		grpname : 1;
 }						t_opt;
 
 void					usage(char *options);
@@ -57,6 +57,7 @@ char					*file_mode(t_ls entry, char *dirname);
 char					file_type(mode_t mode);
 
 t_opt					options(t_opt *opt);
+int						opt_needstat(void);
 void					opt_parse(int *ac, char ***av);
 
 void					display(char *av);

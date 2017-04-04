@@ -19,6 +19,11 @@ static void	puttime(time_t clock)
 	char *result;
 
 	mtime = ctime(&clock);
+	/* ft_putchar('\n'); */
+	/* ft_putnbr(ft_strlen(mtime)); */
+	/* ft_putchar('\n'); */
+	/* ft_putstr(mtime); */
+	/* ft_putchar('\n'); */
 	result = ft_strnew(12);
 	if (mtime != NULL && result != NULL)
 	{
@@ -146,6 +151,26 @@ void		putlongls(t_ls entry, char *dirname, int *padlen)
 	ft_putchar('\n');
 }
 
+/*
+** Return the number of valid entries. The length can be deseptive since it is
+** the number of valid entries in a directory but some of thoses entries my fail
+** a stat/lstat.
+*/
+int			valid_entries(t_ls *entry, int length)
+{
+	int		i;
+	int		result;
+
+	result = 0;
+	i = -1;
+	while (++i < length && entry)
+	{
+		if (entry[i].stat.st_ino != 0)
+			++result;
+	}
+	return (result);
+}
+
 void		display_long(t_ls *entry, int length, char *dirname, int block)
 {
 	int		i;
@@ -153,9 +178,16 @@ void		display_long(t_ls *entry, int length, char *dirname, int block)
 
 	i = -1;
 	padsize(entry, length, padlen);
-	if (length > 0 && block == 1)
+	if (valid_entries(entry, length) > 0 && block == 1)
 		display_blocks(entry, length);
 	while (++i < length)
-		if (entry[i].dirent.d_name[0] != 0)
+	{
+		if (entry[i].stat.st_ino != 0)
 			putlongls(entry[i], dirname, padlen);
+		/* else */
+		/* { */
+		/* 	errno = EACCES; */
+		/* 	error(entry[i].dirent.d_name); */
+		/* } */
+	}
 }
