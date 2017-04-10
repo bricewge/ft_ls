@@ -24,22 +24,22 @@ static void	puttime(time_t clock)
 	/* ft_putchar('\n'); */
 	/* ft_putstr(mtime); */
 	/* ft_putchar('\n'); */
-	result = ft_strnew(12);
+	result = ft_strnew(ft_strlen(mtime));
 	if (mtime != NULL && result != NULL)
 	{
 		if (ft_abs(time(NULL) - clock) < 15768000)
 			result = ft_strsub(mtime, 4, 12);
 		else
 		{
-			result = ft_strsub(mtime, 4, 7);
-			ft_strcpy(result + 7, ft_strsub(mtime, 19, 5));
+			result = ft_strsub(mtime, 4, 6);
+			ft_strcpy(result + 6, "  ");
+			ft_strcpy(result + 8, ft_strtrim(mtime + 19));
 		}
 		/* free(mtime); */
 	}
 	ft_putstr(result);
 	free(result);
 }
-
 
 /*
 ** Display the header on top of each directory entry in long format which
