@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void		display_one(t_ls *entry, int length)
+void		display_one(t_ls *entry, int length, int dir)
 {
 	int i;
 
@@ -22,9 +22,11 @@ void		display_one(t_ls *entry, int length)
 		if (opt_needstat())
 		{
 			if (entry[i].stat.st_ino != 0)
-				ft_putendl(entry[i].dirent.d_name);
+				if (!(dir == 0 && file_type(entry[i].stat.st_mode) == 'd'))
+					ft_putendl(entry[i].dirent.d_name);
 		}
 		else if (entry[i].dirent.d_name[0] != 0)
-			ft_putendl(entry[i].dirent.d_name);
+			if (!(dir == 0 && file_type(entry[i].stat.st_mode) == 'd'))
+				ft_putendl(entry[i].dirent.d_name);
 	}
 }

@@ -134,9 +134,9 @@ void	dirent(char *dirname, int ac)
 	if (opts.sortrev)
 		ft_reverse(dircont, length, sizeof(*dircont));
 	if (opts.done)
-		display_one(dircont, length);
+		display_one(dircont, length, 1);
 	else if (opts.dlong)
-		display_long(dircont, length, dirname, 1);
+		display_long(dircont, length, dirname, (int[]){1, 1});
 	if (opts.recur == 1)
 	{
 		first = 1;

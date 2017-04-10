@@ -55,7 +55,7 @@ void	putnbrp(int nbr, int len, int pos)
 	free(strp);
 }
 
-void	padsize(t_ls *entry, int length, int *padlen)
+void	padsize(t_ls *entry, int length, int *padlen, int dir)
 {
 	int i;
 	int tmp;
@@ -66,20 +66,23 @@ void	padsize(t_ls *entry, int length, int *padlen)
 	i = -1;
 	while (++i < length)
 	{
-		tmp = ft_nbrlen(entry[i].stat.st_nlink);
-		if (tmp > padlen[0])
-			padlen[0] = tmp;
-		tmp = ft_strlen(getpwuid(entry[i].stat.st_uid)->pw_name);
-		if (tmp > padlen[1])
-			padlen[1] = tmp;
-		tmp = ft_strlen(getgrgid(entry[i].stat.st_gid)->gr_name);
-		if (tmp > padlen[2])
-			padlen[2] = tmp;
-		tmp = ft_nbrlen(entry[i].stat.st_size);
-		if (file_type(entry[i].stat.st_mode) == 'c'
-			|| file_type(entry[i].stat.st_mode) == 'b')
-			padlen[3] = 8;
-		else if (tmp > padlen[3])
-			padlen[3] = tmp;
+		if (!(dir == 0 && file_type(entry[i].stat.st_mode) == 'd'))
+		{
+			tmp = ft_nbrlen(entry[i].stat.st_nlink);
+			if (tmp > padlen[0])
+				padlen[0] = tmp;
+			tmp = ft_strlen(getpwuid(entry[i].stat.st_uid)->pw_name);
+			if (tmp > padlen[1])
+				padlen[1] = tmp;
+			tmp = ft_strlen(getgrgid(entry[i].stat.st_gid)->gr_name);
+			if (tmp > padlen[2])
+				padlen[2] = tmp;
+			tmp = ft_nbrlen(entry[i].stat.st_size);
+			if (file_type(entry[i].stat.st_mode) == 'c'
+				|| file_type(entry[i].stat.st_mode) == 'b')
+				padlen[3] = 8;
+			else if (tmp > padlen[3])
+				padlen[3] = tmp;
+		}
 	}
 }

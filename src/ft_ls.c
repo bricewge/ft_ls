@@ -14,20 +14,20 @@
 
 int		main(int ac, char **av)
 {
-	int		i;
+	/* int		i; */
 
 	progname(av[0]);
 	opt_parse(&ac, &av);
 	arg_sort(ac, &av);
 	arg_files(ac, av);
-	i = 0;
-	while (ac > i)
-	{
-		if (av[i] != NULL)
-			/* ft_putendl(av[i]); */
-			dirent(av[i], ac);
-		i++;
-	}
+	/* i = 0; */
+	/* while (ac > i) */
+	/* { */
+	/* 	if (av[i] != NULL) */
+	/* 		/\* ft_putendl(av[i]); *\/ */
+	/* 		dirent(av[i], ac); */
+	/* 	i++; */
+	/* } */
 	if (ac == 0)
 		dirent(".", ac);
 	return (0);

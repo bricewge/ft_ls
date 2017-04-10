@@ -28,15 +28,15 @@ static int	store_fcont(t_ls *file, char **path, int *dirs)
 		st = lstat(*path, &buf);
 	if (st == 0)
 	{
-		if (file_type(buf.st_mode) != 'd')
+		/* if (file_type(buf.st_mode) != 'd') */
+		/* { */
+		ft_strcpy(file->dirent.d_name, *path);
+		file->stat = buf;
+		*path = NULL;
+		/* } */
+		if (file_type(buf.st_mode) == 'd')
 		{
-			ft_strcpy(file->dirent.d_name, *path);
-			file->stat = buf;
-			*path = NULL;
-		}
-		else
-		{
-			*dirs = 1;
+			*dirs += 1;
 			return (0);
 		}
 	}
@@ -47,6 +47,19 @@ static int	store_fcont(t_ls *file, char **path, int *dirs)
 		return (0);
 	}
 	return (1);
+}
+
+
+void	arg_dirs(t_ls *entry, int length, int pdirn)
+{
+	int		i;
+
+	i = -1;
+	while (++i < length)
+	{
+		if (file_type(entry[i].stat.st_mode) == 'd')
+			dirent(entry[i].dirent.d_name, pdirn);
+	}
 }
 
 /*
@@ -82,11 +95,12 @@ void	arg_files(int ac, char **argv)
 		if (opts.sortrev)
 			ft_reverse(fcont, ac, sizeof(*fcont));
 		if (opts.done)
-			display_one(fcont, ac);
+			display_one(fcont, ac, 0);
 		else if (opts.dlong)
-			display_long(fcont, ac, ".", 0);
+			display_long(fcont, ac, ".", (int[]){0, 0});
 	}
-	free(fcont);
 	if (files && dirs)
 		ft_putchar('\n');
+	arg_dirs(fcont, ac, dirs);
+	free(fcont);
 }

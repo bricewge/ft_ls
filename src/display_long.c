@@ -171,19 +171,20 @@ int			valid_entries(t_ls *entry, int length)
 	return (result);
 }
 
-void		display_long(t_ls *entry, int length, char *dirname, int block)
+void			display_long(t_ls *entry, int length, char *dirname, int flag[2])
 {
-	int		i;
-	int		padlen[4];
+	int			i;
+	int			padlen[4];
 
 	i = -1;
-	padsize(entry, length, padlen);
-	if (valid_entries(entry, length) > 0 && block == 1)
+	padsize(entry, length, padlen, flag[1]);
+	if (valid_entries(entry, length) > 0 && flag[0] == 1)
 		display_blocks(entry, length);
 	while (++i < length)
 	{
 		if (entry[i].stat.st_ino != 0)
-			putlongls(entry[i], dirname, padlen);
+			if (!(flag[1] == 0 && file_type(entry[i].stat.st_mode) == 'd'))
+				putlongls(entry[i], dirname, padlen);
 		/* else */
 		/* { */
 		/* 	errno = EACCES; */

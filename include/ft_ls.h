@@ -61,9 +61,9 @@ int						opt_needstat(void);
 void					opt_parse(int *ac, char ***av);
 
 void					display(char *av);
-void					display_one(t_ls *entry, int length);
+void					display_one(t_ls *entry, int length, int dir);
 void					display_long(t_ls *entry, int lenght, char *dirname,
-										int block);
+										int flag[2]);
 
 int						alphacmp(const void *p1, const void *p2);
 int						mtimecmp(const void *p1, const void *p2);
@@ -76,7 +76,7 @@ t_ls					*dir_store(char *dirname, int length);
 char					*padding(char *str, int len, int pos);
 void					putstrp(char *str, int len, int pos);
 void					putnbrp(int nbr, int len, int pos);
-void					padsize(t_ls *entry, int length, int *padlen);
+void					padsize(t_ls *entry, int length, int *padlen, int dir);
 void					putdirname(char *dir, int *first);
 
 void					arg_sort(int argc, char ***argv);
