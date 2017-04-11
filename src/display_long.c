@@ -62,15 +62,13 @@ static void	display_blocks(t_ls *entry, int length)
 	ft_putchar('\n');
 }
 
-char	*ft_pathjoin(const char *dir, const char *file)
+char		*ft_pathjoin(const char *dir, const char *file)
 {
-	char *path;
-	int i;
+	char	*path;
+	int		len;
 
-	i = 0;
-	while (dir[i])
-		++i;
-	if (dir[i - 1] != '/')
+	len = ft_strlen(dir);
+	if (dir[len - 1] != '/')
 	{
 		path = ft_strjoin(dir, "/");
 		path = ft_strjoinf(path, file, 1);
@@ -94,8 +92,13 @@ static void	putlink(t_ls entry, char *dirname)
 	{
 		size = 255;
 		linkname = ft_strnew(size);
-		path = ft_strjoin(dirname, "/");
-		path = ft_strjoinf(path, entry.dirent.d_name, 1);
+		if (entry.dirent.d_name[0] == '/')
+			path = entry.dirent.d_name;
+		else
+		{
+			path = ft_strjoin(dirname, "/");
+			path = ft_strjoinf(path, entry.dirent.d_name, 1);
+		}
 		readlink(path, linkname, size);
 		if (error(entry.dirent.d_name))
 		{

@@ -14,27 +14,35 @@
 
 static int	store_fcont(t_ls *file, char **path, int *dirs)
 {
-	t_stat	buf;
-	int		st;
+	t_stat	buf1;
+	t_stat	buf2;
+	int		st1;
+	int		st2;
 
+	st1 = lstat(*path, &buf1);
+	st2 = 0;
 	if (options(NULL).done)
 	{
-		st = lstat(*path, &buf);
-		if (st == 0)
-			if (file_type(buf.st_mode) == 'l')
-				st = stat(*path, &buf);
+		if (st1 == 0)
+		{
+			errno = 0;
+			if (file_type(buf1.st_mode) == 'l')
+			{
+				st2 = stat(*path, &buf2);
+				if (st2 == 0)
+					buf1 = buf2;
+			}
+		}
 	}
-	else
-		st = lstat(*path, &buf);
-	if (st == 0)
+	if (st1 == 0)
 	{
 		/* if (file_type(buf.st_mode) != 'd') */
 		/* { */
 		ft_strcpy(file->dirent.d_name, *path);
-		file->stat = buf;
+		file->stat = buf1;
 		*path = NULL;
 		/* } */
-		if (file_type(buf.st_mode) == 'd')
+		if (file_type(buf1.st_mode) == 'd')
 		{
 			*dirs += 1;
 			return (0);
@@ -101,6 +109,6 @@ void	arg_files(int ac, char **argv)
 	}
 	if (files && dirs)
 		ft_putchar('\n');
-	arg_dirs(fcont, ac, dirs);
+	arg_dirs(fcont, ac, ac - files);
 	free(fcont);
 }

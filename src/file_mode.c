@@ -40,7 +40,10 @@ char		file_xattracl(t_ls entry, char *dirname)
 	int 	xattr;
 
 	result = ' ';
-	path = ft_pathjoin(dirname, entry.dirent.d_name);
+	if (entry.dirent.d_name[0] == '/')
+		path = entry.dirent.d_name;
+	else
+		path = ft_pathjoin(dirname, entry.dirent.d_name);
 	acl  = acl_get_file(path, ACL_TYPE_EXTENDED);
 	if (acl)
 	{
@@ -52,7 +55,8 @@ char		file_xattracl(t_ls entry, char *dirname)
 		result = '@';
 	/* else if (xattr == -1) */
 	errno = 0;
-	free(path);
+	if (entry.dirent.d_name[0] != '/')
+		free(path);
 	return (result);
 }
 
