@@ -35,17 +35,17 @@ typedef struct			s_ls
 }						t_ls;
 typedef struct			s_opt
 {
-	unsigned int 		dlong : 1;
-	unsigned int 		done : 1;
-	unsigned int 		recur : 1;
-	unsigned int 		all : 1;
-	unsigned int 		sortrev : 1;
-	unsigned int 		sortmtime : 1;
-	unsigned int 		sortatime : 1;
-	unsigned int 		color : 1;
-	unsigned int 		sortno : 1;
-	unsigned int 		dir : 1;
-	unsigned int 		grpname : 1;
+	t_uint				dlong : 1;
+	t_uint				done : 1;
+	t_uint				recur : 1;
+	t_uint				all : 1;
+	t_uint				sortrev : 1;
+	t_uint				sortmtime : 1;
+	t_uint				sortatime : 1;
+	t_uint				color : 1;
+	t_uint				sortno : 1;
+	t_uint				dir : 1;
+	t_uint				grpname : 1;
 }						t_opt;
 
 void					usage(char *options);
@@ -83,4 +83,7 @@ void					arg_sort(int argc, char ***argv);
 
 char					*ft_pathjoin(const char *dir, const char *file);
 void					arg_files(int ac, char **argv);
+void					arg_files2(t_ls *fcont, int ac, int distype[]);
+
+void					putlongls(t_ls entry, char *dirname, int *padlen);
 #endif

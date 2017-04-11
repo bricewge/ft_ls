@@ -12,7 +12,26 @@
 
 #include "ft_ls.h"
 
-static int	store_fcont(t_ls *file, char **path, int *dirs)
+static int	store_fcont2(t_ls *file, char **path, int st1, t_stat buf1)
+{
+	if (st1 == 0)
+	{
+		ft_strcpy(file->dirent.d_name, *path);
+		file->stat = buf1;
+		*path = NULL;
+		if (file_type(buf1.st_mode) == 'd')
+			return (0);
+	}
+	else
+	{
+		error(*path);
+		*path = NULL;
+		return (0);
+	}
+	return (1);
+}
+
+static int	store_fcont(t_ls *file, char **path)
 {
 	t_stat	buf1;
 	t_stat	buf2;
@@ -34,31 +53,10 @@ static int	store_fcont(t_ls *file, char **path, int *dirs)
 			}
 		}
 	}
-	if (st1 == 0)
-	{
-		/* if (file_type(buf.st_mode) != 'd') */
-		/* { */
-		ft_strcpy(file->dirent.d_name, *path);
-		file->stat = buf1;
-		*path = NULL;
-		/* } */
-		if (file_type(buf1.st_mode) == 'd')
-		{
-			*dirs += 1;
-			return (0);
-		}
-	}
-	else
-	{
-		error(*path);
-		*path = NULL;
-		return (0);
-	}
-	return (1);
+	return (store_fcont2(file, path, st1, buf1));
 }
 
-
-void	arg_dirs(t_ls *entry, int length, int pdirn)
+void		arg_dirs(t_ls *entry, int length, int pdirn)
 {
 	int		i;
 
@@ -70,44 +68,47 @@ void	arg_dirs(t_ls *entry, int length, int pdirn)
 	}
 }
 
+void		arg_files2(t_ls *fcont, int ac, int distype[])
+{
+	t_opt	opts;
+
+	opts = options(NULL);
+	if (opts.sortno)
+		;
+	else if (opts.sortatime)
+		ft_bsort(fcont, ac, sizeof(*fcont), atimecmp);
+	else if (opts.sortmtime)
+		ft_bsort(fcont, ac, sizeof(*fcont), mtimecmp);
+	else
+		ft_bsort(fcont, ac, sizeof(*fcont), alphacmp);
+	if (opts.sortrev)
+		ft_reverse(fcont, ac, sizeof(*fcont));
+	if (opts.done)
+		display_one(fcont, ac, 0);
+	else if (opts.dlong)
+		display_long(fcont, ac, ".", distype);
+}
+
 /*
 ** Display files which where passed in the arguments.
 */
-void	arg_files(int ac, char **argv)
+
+void		arg_files(int ac, char **argv)
 {
-	t_opt	opts;
 	int		i;
 	t_ls	*fcont;
 	int		files;
-	int		dirs;
 
-	opts = options(NULL);
 	i = -1;
 	files = 0;
-	dirs = 0;
 	fcont = (t_ls*)malloc(sizeof(*fcont) * ac);
 	while (++i < ac)
 	{
-		files += store_fcont(fcont + i, &(argv[i]), &dirs);
+		files += store_fcont(fcont + i, &(argv[i]));
 	}
 	if (files)
-	{
-		if (opts.sortno)
-			;
-		else if (opts.sortatime)
-			ft_bsort(fcont, ac, sizeof(*fcont), atimecmp);
-		else if (opts.sortmtime)
-			ft_bsort(fcont, ac, sizeof(*fcont), mtimecmp);
-		else
-			ft_bsort(fcont, ac, sizeof(*fcont), alphacmp);
-		if (opts.sortrev)
-			ft_reverse(fcont, ac, sizeof(*fcont));
-		if (opts.done)
-			display_one(fcont, ac, 0);
-		else if (opts.dlong)
-			display_long(fcont, ac, ".", (int[]){0, 0});
-	}
-	if (files && dirs)
+		arg_files2(fcont, ac, (int[]){0, 0});
+	if (files && ac - files)
 		ft_putchar('\n');
 	arg_dirs(fcont, ac, ac - files);
 	free(fcont);
