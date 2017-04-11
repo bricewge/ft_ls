@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 typedef	unsigned char	t_byte;
+typedef	unsigned int	t_uint;
 typedef struct			s_list
 {
 	void				*content;
@@ -116,4 +117,6 @@ int						ft_abs(int i);
 int						ft_nbrlen(int nbr);
 void					ft_swap(void *a, void *b, size_t size);
 void					ft_reverse(void *base, size_t nel, size_t width);
+void					ft_bsort(void *base, size_t nel, size_t width,
+									int (*compar)(const void *, const void *));
 #endif

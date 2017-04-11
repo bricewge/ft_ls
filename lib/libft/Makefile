@@ -55,6 +55,7 @@ SRC_NAME =	ctype/ft_isalnum.c					\
 						stdio/ft_putstr_fd.c				\
 						stdlib/ft_atoi.c						\
 						stdlib/ft_abs.c							\
+						stdlib/ft_bsort.c						\
 						string/ft_bzero.c						\
 						string/ft_memccpy.c					\
 						string/ft_memchr.c					\
