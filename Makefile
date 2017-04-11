@@ -56,19 +56,6 @@ all: $(NAME)
 $(NAME): $(LIB)/$(LIB).a $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJ) -o $(NAME)
 
-list_dir: $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(SRC_PATH)/file_mode.c $(SRC_PATH)/display.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/list_dir.c $(SRC_PATH)/error.c $(SRC_PATH)/file_mode.c $(SRC_PATH)/display.c -o list_dir
-
-list_recur: $(SRC_PATH)/list_recur.c $(SRC_PATH)/file_mode.c $(SRC_PATH)/error.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/list_recur.c $(SRC_PATH)/file_mode.c  $(SRC_PATH)/error.c -o list_recur
-
-inspect_file: $(SRC_PATH)/inspect_file.c src/file_mode.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $< src/file_mode.c -o $@
-
-test_opt: $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(HEADER) $(LIB)/$(LIB).a
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) $(SRC_PATH)/test_opt.c $(SRC_PATH)/usage.c $(LIB)/src/misc/ft_getopt.c -o $@
-
-
 $(OBJ_PATH):
 	mkdir $@
 
