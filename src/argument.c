@@ -31,5 +31,5 @@ void	arg_sort(int argc, char ***argv)
 	if (opt.sortno)
 		;
 	else
-		qsort(*argv, argc, sizeof(**argv), stringcmp);
+		ft_bsort(*argv, argc, sizeof(**argv), stringcmp);
 }

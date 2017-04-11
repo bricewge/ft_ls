@@ -124,13 +124,13 @@ void	dirent(char *dirname, int ac)
 	if (opts.sortno)
 		;
 	else if (opts.sortatime)
-		qsort(dircont, length, sizeof(*dircont), atimecmp);
+		ft_bsort(dircont, length, sizeof(*dircont), atimecmp);
 	else if (opts.sortmtime)
-		qsort(dircont, length, sizeof(*dircont), mtimecmp);
+		ft_bsort(dircont, length, sizeof(*dircont), mtimecmp);
 	else
-		qsort(dircont, length, sizeof(*dircont), alphacmp);
+		ft_bsort(dircont, length, sizeof(*dircont), alphacmp);
 	/* else */
-	/* 	qsort(dircont, length, sizeof(*dircont), alphacmp); */
+	/* 	ft_bsort(dircont, length, sizeof(*dircont), alphacmp); */
 	if (opts.sortrev)
 		ft_reverse(dircont, length, sizeof(*dircont));
 	if (opts.done)

@@ -95,11 +95,11 @@ void	arg_files(int ac, char **argv)
 		if (opts.sortno)
 			;
 		else if (opts.sortatime)
-			qsort(fcont, ac, sizeof(*fcont), atimecmp);
+			ft_bsort(fcont, ac, sizeof(*fcont), atimecmp);
 		else if (opts.sortmtime)
-			qsort(fcont, ac, sizeof(*fcont), mtimecmp);
+			ft_bsort(fcont, ac, sizeof(*fcont), mtimecmp);
 		else
-			qsort(fcont, ac, sizeof(*fcont), alphacmp);
+			ft_bsort(fcont, ac, sizeof(*fcont), alphacmp);
 		if (opts.sortrev)
 			ft_reverse(fcont, ac, sizeof(*fcont));
 		if (opts.done)
