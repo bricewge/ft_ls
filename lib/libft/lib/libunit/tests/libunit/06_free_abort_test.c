@@ -21,4 +21,3 @@ int		free_abort_test(void)
 	else
 		return (-1);
 }
-

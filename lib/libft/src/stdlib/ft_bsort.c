@@ -13,7 +13,7 @@
 #include "libft.h"
 
 void	ft_bsort(void *base, size_t nel, size_t width,
-			  int (*compar)(const void *, const void *))
+				int (*compar)(const void *, const void *))
 {
 	t_uint	i;
 	int		swapped;
@@ -21,7 +21,7 @@ void	ft_bsort(void *base, size_t nel, size_t width,
 	void	*el2;
 
 	if (nel <= 1)
-		return;
+		return ;
 	swapped = 0;
 	i = -1;
 	while (++i < nel - 1)

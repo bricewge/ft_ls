@@ -26,5 +26,5 @@ int		large_positive_loop_test(void)
 		result = -1;
 	if (str)
 		free(str);
-	return(result);
+	return (result);
 }

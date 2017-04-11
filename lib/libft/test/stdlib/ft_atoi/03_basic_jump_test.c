@@ -19,4 +19,3 @@ int		basic_jump_test(void)
 	else
 		return (-1);
 }
-
