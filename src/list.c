@@ -12,39 +12,45 @@
 
 #include "ft_ls.h"
 
-int 	listl(char *dirname)
+static void		listl2(DIR *dirp, char *dirname)
 {
+	t_dirent	*dp;
 	char		*nextdir;
 	t_stat		buf;
+
+	while ((dp = readdir(dirp)) != NULL)
+	{
+		if (!(ft_strequ(dp->d_name, ".") || ft_strequ(dp->d_name, "..")))
+		{
+			nextdir = pathjoin(dirname, dp->d_name);
+			if (lstat(nextdir, &buf) == 0)
+			{
+				if (S_ISDIR(buf.st_mode))
+				{
+					listl_recur(nextdir);
+					ft_putendl(nextdir);
+				}
+			}
+			else
+				error(nextdir);
+			free(nextdir);
+		}
+	}
+}
+
+int				listl(char *dirname)
+{
 	DIR			*dirp;
-	t_dirent	*dp;
 
 	dirp = opendir(dirname);
 	if (errno != 0)
-		return(error(dirname));
+		return (error(dirname));
 	else
 	{
-		while ((dp = readdir(dirp)) != NULL)
-		{
-			if ( !(ft_strequ(dp->d_name, ".") || ft_strequ(dp->d_name, "..")) )
-			{
-				nextdir = pathjoin(dirname, dp->d_name);
-				if (lstat(nextdir, &buf) == 0)
-				{
-					if (S_ISDIR(buf.st_mode))
-					{
-						listl_recur(nextdir);
-						ft_putendl(nextdir);
-					}
-				}
-				else
-					error(nextdir);
-				free(nextdir);
-			}
-		}
+		listl2(dirp, dirname);
 		closedir(dirp);
 		if (errno != 0)
 			return (error(dirname));
 	}
-	return(0);
+	return (0);
 }

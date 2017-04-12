@@ -15,7 +15,8 @@
 /*
 ** Return the total number of entries in a directory.
 */
-int		dirent_cnt(char *dirname)
+
+int				dirent_cnt(char *dirname)
 {
 	int			count;
 	DIR			*dirp;
@@ -37,10 +38,10 @@ int		dirent_cnt(char *dirname)
 		closedir(dirp);
 		error(dirname);
 	}
-	return(count);
+	return (count);
 }
 
-static int	dirent_store(t_ls *entry, t_dirent *dirent, char *dirname)
+static int		dirent_store(t_ls *entry, t_dirent *dirent, char *dirname)
 {
 	t_stat		buf;
 	char		*path;
@@ -64,7 +65,8 @@ static int	dirent_store(t_ls *entry, t_dirent *dirent, char *dirname)
 /*
 ** Store the metadata of each entries in a given directory.
 */
-t_ls	*dir_store(char *dirname, int length)
+
+t_ls			*dir_store(char *dirname, int length)
 {
 	t_ls		*entry;
 	int			i;
@@ -84,14 +86,14 @@ t_ls	*dir_store(char *dirname, int length)
 		closedir(dirp);
 		error(dirname);
 	}
-	return(entry);
+	return (entry);
 }
 
-void	dirent_recur(t_ls *dircont, int length, char *dirname)
+void			dirent_recur(t_ls *dircont, int length, char *dirname)
 {
-	int i;
-	char *path;
-	char *filename;
+	int			i;
+	char		*path;
+	char		*filename;
 
 	i = -1;
 	while (++i < length)
@@ -107,36 +109,19 @@ void	dirent_recur(t_ls *dircont, int length, char *dirname)
 	}
 }
 
-
-
-void	dirent(char *dirname, int ac)
+void			dirent(char *dirname, int ac)
 {
 	t_opt		opts;
 	t_ls		*dircont;
 	int			length;
-	static int first = 0;
+	static int	first = 0;
 
 	opts = options(NULL);
 	if (ac > 1)
 		putdirname(dirname, &first);
 	length = dirent_cnt(dirname);
 	dircont = dir_store(dirname, length);
-	if (opts.sortno)
-		;
-	else if (opts.sortatime)
-		ft_bsort(dircont, length, sizeof(*dircont), atimecmp);
-	else if (opts.sortmtime)
-		ft_bsort(dircont, length, sizeof(*dircont), mtimecmp);
-	else
-		ft_bsort(dircont, length, sizeof(*dircont), alphacmp);
-	/* else */
-	/* 	ft_bsort(dircont, length, sizeof(*dircont), alphacmp); */
-	if (opts.sortrev)
-		ft_reverse(dircont, length, sizeof(*dircont));
-	if (opts.done)
-		display_one(dircont, length, 1);
-	else if (opts.dlong)
-		display_long(dircont, length, dirname, (int[]){1, 1});
+	arg_files2(dircont, length, (int[]){1, 1}, dirname);
 	if (opts.recur == 1)
 	{
 		first = 1;

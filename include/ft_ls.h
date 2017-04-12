@@ -83,7 +83,8 @@ void					arg_sort(int argc, char ***argv);
 
 char					*ft_pathjoin(const char *dir, const char *file);
 void					arg_files(int ac, char **argv);
-void					arg_files2(t_ls *fcont, int ac, int distype[]);
+void					arg_files2(t_ls *fcont, int ac, int distype[],
+									char *dirname);
 
 void					putlongls(t_ls entry, char *dirname, int *padlen);
 #endif

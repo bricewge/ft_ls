@@ -19,7 +19,7 @@ int			alphacmp(const void *p1, const void *p2)
 
 	c1 = ((t_ls*)p1)->dirent.d_name;
 	c2 = ((t_ls*)p2)->dirent.d_name;
-	return(ft_strcmp(c1, c2));
+	return (ft_strcmp(c1, c2));
 }
 
 int			mtimecmp(const void *p1, const void *p2)
@@ -38,10 +38,9 @@ int			mtimecmp(const void *p1, const void *p2)
 		return (ft_strcmp(c1, c2));
 	}
 	else
-		return(t2 - t1);
+		return (t2 - t1);
 }
 
-// TODO doesn't seem to work
 int			atimecmp(const void *p1, const void *p2)
 {
 	time_t	t1;
@@ -58,5 +57,5 @@ int			atimecmp(const void *p1, const void *p2)
 		return (ft_strcmp(c1, c2));
 	}
 	else
-		return(t2 - t1);
+		return (t2 - t1);
 }

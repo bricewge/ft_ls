@@ -28,6 +28,7 @@ NAME = ft_ls
 SRC_PATH =  src
 SRC_NAME =	usage.c					\
 						file_mode.c			\
+						file_type.c			\
 						error.c					\
 						display_long.c	\
 						display_one.c		\

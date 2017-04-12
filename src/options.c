@@ -33,6 +33,30 @@ int			opt_needstat(void)
 		return (0);
 }
 
+void		opt_parse2(int opt, t_opt *opts)
+{
+	if (opt == 'R')
+		opts->recur = 1;
+	else if (opt == 'a')
+		opts->all = 1;
+	else if (opt == '1')
+	{
+		opts->dlong = 0;
+		opts->done = 1;
+	}
+	else if (opt == 'l')
+	{
+		opts->dlong = 1;
+		opts->done = 0;
+	}
+	else if (opt == 'r')
+		opts->sortrev = 1;
+	else if (opt == 't')
+		opts->sortmtime = 1;
+	else
+		usage(OPTIONS);
+}
+
 void		opt_parse(int *ac, char ***av)
 {
 	int		opt;
@@ -41,26 +65,7 @@ void		opt_parse(int *ac, char ***av)
 	opts = options(NULL);
 	while ((opt = ft_getopt(*ac, *av, OPTIONS)) != -1)
 	{
-		if (opt == 'R')
-			opts.recur = 1;
-		else if (opt == 'a')
-			opts.all = 1;
-		else if (opt == '1')
-		{
-			opts.dlong = 0;
-			opts.done = 1;
-		}
-		else if (opt == 'l')
-		{
-			opts.dlong = 1;
-			opts.done = 0;
-		}
-		else if (opt == 'r')
-			opts.sortrev = 1;
-		else if (opt == 't')
-			opts.sortmtime = 1;
-		else
-			usage(OPTIONS);
+		opt_parse2(opt, &opts);
 	}
 	options(&opts);
 	*ac -= optind;

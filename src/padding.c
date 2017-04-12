@@ -16,13 +16,13 @@
 ** Padd a string to the left (pos=0) or the right (pos=1)
 */
 
-char	*padding(char *str, int totallen, int pos)
+char		*padding(char *str, int totallen, int pos)
 {
 	int		len;
 	char	*start;
 	char	*padded;
 
-	len =  ft_strlen(str);
+	len = ft_strlen(str);
 	padded = ft_strnew(totallen);
 	ft_memset(padded, ' ', totallen);
 	start = padded;
@@ -34,7 +34,7 @@ char	*padding(char *str, int totallen, int pos)
 	return (padded);
 }
 
-void	putstrp(char *str, int len, int pos)
+void		putstrp(char *str, int len, int pos)
 {
 	char	*strp;
 
@@ -43,7 +43,7 @@ void	putstrp(char *str, int len, int pos)
 	free(strp);
 }
 
-void	putnbrp(int nbr, int len, int pos)
+void		putnbrp(int nbr, int len, int pos)
 {
 	char	*str;
 	char	*strp;
@@ -55,15 +55,20 @@ void	putnbrp(int nbr, int len, int pos)
 	free(strp);
 }
 
-void	padsize(t_ls *entry, int length, int *padlen, int dir)
+static void	padsize2(int *padlen, int *i)
 {
-	int i;
-	int tmp;
+	*i = -1;
+	while (++*i < 4)
+		padlen[*i] = 0;
+	*i = -1;
+}
 
-	i = -1;
-	while (++i < 4)
-		padlen[i] = 0;
-	i = -1;
+void		padsize(t_ls *entry, int length, int *padlen, int dir)
+{
+	int		i;
+	int		tmp;
+
+	padsize2(padlen, &i);
 	while (++i < length)
 	{
 		if (!(dir == 0 && file_type(entry[i].stat.st_mode) == 'd'))

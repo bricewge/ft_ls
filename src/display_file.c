@@ -68,7 +68,7 @@ void		arg_dirs(t_ls *entry, int length, int pdirn)
 	}
 }
 
-void		arg_files2(t_ls *fcont, int ac, int distype[])
+void		arg_files2(t_ls *fcont, int ac, int distype[], char *dirname)
 {
 	t_opt	opts;
 
@@ -84,9 +84,9 @@ void		arg_files2(t_ls *fcont, int ac, int distype[])
 	if (opts.sortrev)
 		ft_reverse(fcont, ac, sizeof(*fcont));
 	if (opts.done)
-		display_one(fcont, ac, 0);
+		display_one(fcont, ac, distype[0]);
 	else if (opts.dlong)
-		display_long(fcont, ac, ".", distype);
+		display_long(fcont, ac, dirname, distype);
 }
 
 /*
@@ -107,7 +107,7 @@ void		arg_files(int ac, char **argv)
 		files += store_fcont(fcont + i, &(argv[i]));
 	}
 	if (files)
-		arg_files2(fcont, ac, (int[]){0, 0});
+		arg_files2(fcont, ac, (int[]){0, 0}, ".");
 	if (files && ac - files)
 		ft_putchar('\n');
 	arg_dirs(fcont, ac, ac - files);
